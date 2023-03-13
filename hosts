@@ -1,0 +1,12 @@
+all:
+  hosts:
+    test.server.com
+  children:
+    debian_servers:
+      hosts:
+        test.server.com
+    rhel_servers:
+      hosts:
+    test:
+      hosts:
+        test.server.com

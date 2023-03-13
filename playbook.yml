@@ -1,0 +1,10 @@
+---
+- name: Configure Servers
+  hosts: debian_servers
+  user: "devops"
+  become: true
+
+  tasks:
+    - name: Update Package Cache
+      ansible.builtin.apt:
+        update_cache: true
