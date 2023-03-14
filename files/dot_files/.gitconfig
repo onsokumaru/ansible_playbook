@@ -1,0 +1,19 @@
+[user]
+	name = onsokumaru
+	email = "mike@justaddpower.com"
+	signingKey = "onsokumaru@users.noreply.github.com"
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
