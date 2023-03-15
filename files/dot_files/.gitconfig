@@ -17,3 +17,12 @@
 	editor = vim
 [init]
 	defaultBranch = main
+[alias]
+	gl = config --global -l
+	co = checkout
+	cob = checkout -b
+	br = branch
+	ci = commit
+	cm = commit -m
+	st = status
+	lo = log --oneline -n 10
