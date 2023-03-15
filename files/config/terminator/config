@@ -1,0 +1,50 @@
+[global_config]
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+[keybindings]
+  split_horiz = <Primary><Super>Right
+  split_vert = <Primary><Super>Down
+[profiles]
+  [[default]]
+    background_color = "#002b36"
+    cursor_color = "#aaaaaa"
+    font = MesloLGS Nerd Font 13
+    foreground_color = "#839496"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    login_shell = True
+    use_system_font = False
+  [[Material-Palenight]]
+    background_color = "#292d3e"
+    cursor_color = "#ffcc00"
+    cursor_color_fg = False
+    foreground_color = "#a6accd"
+    palette = "#2e3436:#ff5370:#c3e88d:#ffcb6b:#82aaff:#c792ea:#89ddff:#d3d7cf:#555753:#f07178:#c3e88d:#f78c6c:#729fcf:#bb80b3:#89ddff:#eeeeec"
+  [[mike]]
+    cursor_color = "#aaaaaa"
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+  [[Palenight]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 112:65
+      maximised = False
+      fullscreen = False
+      size = 734, 451
+      title = /bin/bash
+      last_active_term = 2188925e-3b74-4e78-9408-dfd847eff16f
+      last_active_window = True
+    [[[terminal1]]]
+      type = Terminal
+      parent = child0
+      order = 0
+      profile = default
+      uuid = 2188925e-3b74-4e78-9408-dfd847eff16f
+[plugins]
