@@ -1,21 +1,23 @@
 ---
 - name: Checking for Rust and Installing if Absent
-  hosts: localhost
+  hosts: debian_servers
   gather_facts: true
   become: true
-  become_user: "{{ lookup('env', 'USER') }}"
+  # become_user: "{{ lookup('env', 'USER') }}"
 
   pre_tasks:
     - name: Update Repositories
-      ansible.builtin.apt: 
-      update_cache: yes
-      become_user: root
-      changed_when: false
+      ansible.builtin.apt:
+        update_cache: true
+        # become_user: root
+        # changed_when: false
   vars:
     user: "{{ ansible_user_id }}"
+# TODO: remove logic to check if installed to squash linting failure messages
+# just execute tasks to download and run install script in user home directory
   tasks:
     - name: Check If Cargo Is Installed
-      ansible.builtin.shell: command -v cargo
+      ansible.builtin.command: /usr/bin/which cargo
       register: cargo_exists
       ignore_errors: true
 
@@ -31,6 +33,6 @@
 
     - name: Install Rust/Cargo
       when: cargo_exists is failed
-      ansible.builtin.shell: /tmp/sh.rustup.rs -y
+      ansible.builtin.command: /tmp/sh.rustup.rs -y
       tags:
         - rust
