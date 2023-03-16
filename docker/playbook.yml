@@ -3,6 +3,8 @@
   hosts: debian_servers
   user: "devops"
   become: true
+  vars_files:
+    - vars_files/dockerconf.yml
 
   tasks:
     - name: Update Package Cache
@@ -26,7 +28,8 @@
 
         - name: Add Docker Repository
           ansible.builtin.apt_repository:
-            repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable"
+            # repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable"
+            repo: "deb [arch={{ arch }} signed-by={{ docker_signed_key}}] {{ docker_ubuntu_repo }} {{ ubuntu_release }} stable"
             state: present
 
     - name: Update Package Cache
