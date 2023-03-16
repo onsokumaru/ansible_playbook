@@ -4,7 +4,7 @@
   user: "devops"
   become: true
   vars_files:
-    - vars_files/dockerconf.yml
+    - ../var_files/dockerconf.yml
 
   tasks:
     - name: Update Package Cache
