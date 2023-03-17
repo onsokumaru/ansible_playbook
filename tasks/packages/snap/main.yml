@@ -1,0 +1,16 @@
+---
+- name: Install Snap Packages - non classic
+  community.general.snap:
+    name:
+      - mailspring
+      - zoom-client
+      - lxd
+    classic: false
+  become: true
+
+- name: Install Snap Packages - classic
+  community.general.snap:
+    name:
+      - clion
+    classic: true
+  become: true
