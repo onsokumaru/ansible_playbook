@@ -40,6 +40,7 @@
           - tmux
           - mc
           - ranger
+          - fzf
           - htop
           - vlc
           - mpv
