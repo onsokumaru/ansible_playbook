@@ -1,0 +1,10 @@
+---
+- name: Install pip Packages
+  ansible.builtin.pip:
+    state: latest
+    name:
+      - ansible
+      - ansible-core
+      - ansible-lint
+
+# TODO: make sure these packages get installed as user and not global
