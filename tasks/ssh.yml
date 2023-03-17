@@ -1,0 +1,7 @@
+---
+# TODO: write code to create my ssh directories and generate ssh keys
+# directories are:
+# - .ssh/BitBucket
+# - .ssh/GitHub
+# - .ssh/GitLab
+# - .ssh/Local
