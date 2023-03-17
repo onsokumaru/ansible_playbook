@@ -2,7 +2,8 @@
 arch: 'amd64'
 docker_signed_key: '/etc/apt/keyrings/docker.asc'
 docker_ubuntu_repo: 'https://download.docker.com/linux/ubuntu'
-ubuntu_release: 'jammy'
+ubuntu_release: {{ distribution_release }}
+# ubuntu_release: 'jammy'
 
 # TODO: release version can be determined by ansible facts (ansible.builtin.setup)
 # the key/value is: ansible_facts['distribution_release'], try and leverage that 
