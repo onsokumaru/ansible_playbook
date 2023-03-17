@@ -22,6 +22,8 @@
           - automake
           - gdb
           - libtool
+          - openssh-server
+          - curl
           - apt-transport-https
           - ca-certificates
           - software-properties-common
@@ -39,3 +41,6 @@
           - mc
           - ranger
           - htop
+          - vlc
+          - mpv
+          - vim-nox
