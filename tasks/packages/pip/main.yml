@@ -1,10 +1,20 @@
 ---
-- name: Install pip Packages
+- name: Install Ansible_core
+  become_user: '{{ ansible_user_id }}'
   ansible.builtin.pip:
-    state: latest
     name:
-      - ansible
       - ansible-core
+  args:
+    state: present
+    version: 2.14.3
+
+- name: Install Ansible-Lint
+  become_user: '{{ ansible_user_id }}'
+  ansible.builtin.pip:
+    name:
       - ansible-lint
+  args:
+    state: present
+    version: 6.14.2
 
 # TODO: make sure these packages get installed as user and not global
