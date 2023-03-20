@@ -1,0 +1,3 @@
+---
+user: '{{ ansible_user_id }}'
+rust_chk: '/usr/bin/which cargo'
