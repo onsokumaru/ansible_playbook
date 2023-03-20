@@ -1,0 +1,16 @@
+---
+- name: Docker Check
+  hosts: debian_servers
+  user: "devops"
+  become: true
+
+  tasks:
+    - name: Check for Docker Installation
+      ansible.builtin.command: "/usr/bin/which docker"
+      register: docker_exists
+      ignore_errors: true
+
+    - name: Print results
+      ansible.builtin.debug:
+        msg: "No Docker install found"
+      when: docker_exists is failed

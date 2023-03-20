@@ -1,0 +1,16 @@
+---
+- name: Rust Check
+  hosts: debian_servers
+  user: "devops"
+  become: true
+
+  tasks:
+    - name: Check for Rust Installation
+      ansible.builtin.command: "/usr/bin/which cargo"
+      register: rust_exists
+      ignore_errors: true
+
+    - name: Print results
+      ansible.builtin.debug:
+        msg: "No Rust install found"
+      when: rust_exists is failed
