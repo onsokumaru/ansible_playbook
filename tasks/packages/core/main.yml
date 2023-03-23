@@ -1,47 +1,45 @@
 ---
-- name: Configure Servers
-  hosts: debian_servers
-  user: "devops"
-  become: true
+  # hosts: debian_servers
+  # user: "devops"
+  # become: true
 
-  tasks:
-    - name: Update Package Cache
-      ansible.builtin.apt:
-        update_cache: true
-        cache_valid_time: 43200
-    - name: Install Basic Packages
-      ansible.builtin.apt:
-        pkg:
-          - build-essential
-          - git
-          - git-lfs
-          - clang
-          - cmake
-          - llvm
-          - autoconf
-          - automake
-          - gdb
-          - libtool
-          - openssh-server
-          - curl
-          - apt-transport-https
-          - ca-certificates
-          - software-properties-common
-          - gnupg
-          - python3-pip
-          - python3-venv
-          - python3-dev
-          - pipenv
-          - perl-doc
-          - lsb-release
-          - bison
-          - flex
-          - screen
-          - tmux
-          - mc
-          - ranger
-          - fzf
-          - htop
-          - vlc
-          - mpv
-          - vim-nox
+- name: Update Package Cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 43200
+- name: Install Basic Packages
+  ansible.builtin.apt:
+    pkg:
+      - build-essential
+      - git
+      - git-lfs
+      - clang
+      - cmake
+      - llvm
+      - autoconf
+      - automake
+      - gdb
+      - libtool
+      - openssh-server
+      - curl
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+      - gnupg
+      - python3-pip
+      - python3-venv
+      - python3-dev
+      - pipenv
+      - perl-doc
+      - lsb-release
+      - bison
+      - flex
+      - screen
+      - tmux
+      - mc
+      - ranger
+      - fzf
+      - htop
+      - vlc
+      - mpv
+      - vim-nox
