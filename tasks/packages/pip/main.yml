@@ -3,7 +3,7 @@
   become_user: '{{ ansible_user_id }}'
   ansible.builtin.pip:
     name:
-      - ansible-core
+      - ansible
   args:
     state: present
     version: 2.14.3
