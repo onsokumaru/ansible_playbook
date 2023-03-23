@@ -2,30 +2,34 @@
 # TODO: remove logic to check if installed to squash linting failure messages
 # just execute tasks to download and run install script in user home directory
 #
-- name: Rust Language Installation
+# - name: Rust Language Installation
+#   # become: true
+#   hosts: debian_servers
+#   user: "devops"
+#   # become_user: "{{ ansible_user_id }}"
+
+#   TODO: check for existance of rust from main.yml in project root
+#   tasks:
+# - name: Check for existing Rust install
+#   ansible.builtin.command: "/usr/bin/which cargo"
+#   register: rust_exists
+
+# - name: Download, Install, and Configure Rust
+#   become: true
+#   become_user: "{{ ansible_user_id }}"
+#   ignore_errors: true
+
+- name: Download Rust Installer Script
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: '{{ ansible_user_dir }}/sh.rustup.rs'
+    mode: '0755'
+    force: 'yes'
+
+- name: Install Rust/Cargo
+  ansible.builtin.command: '{{ ansible_user_dir }}/sh.rustup.rs -y'
+
+  # when: rust_exists is failed
   # become: true
-  hosts: debian_servers
-  user: "devops"
   # become_user: "{{ ansible_user_id }}"
-
-  tasks:
-    - name: Check for existing Rust install
-      ansible.builtin.command: "/usr/bin/which cargo"
-      register: rust_exists
-
-    - name: Download, Install, and Configure Rust
-      block:
-        - name: Download Rust Installer Script
-          ansible.builtin.get_url:
-            url: https://sh.rustup.rs
-            dest: '{{ ansible_user_dir }}/sh.rustup.rs'
-            mode: '0755'
-            force: 'yes'
-
-        - name: Install Rust/Cargo
-          ansible.builtin.command: '{{ ansible_user_dir }}/sh.rustup.rs -y'
-
-      when: rust_exists is failed
-      become: true
-      become_user: "{{ ansible_user_id }}"
-      ignore_errors: true
+  # ignore_errors: true
