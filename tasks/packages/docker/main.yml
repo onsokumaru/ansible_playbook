@@ -1,56 +1,54 @@
 ---
-- name: Configure Servers
-  hosts: debian_servers
-  user: "devops"
-  become: true
-  vars_files:
-    - ../var_files/dockerconf.yml
+  # hosts: debian_servers
+  # user: "devops"
+  # become: true
+# vars_files:
+  # - ../var_files/dockerconf.yml
+  # TODO: add var files to main.yml in project root
 
-  tasks:
-    - name: Update Package Cache
-      ansible.builtin.apt:
-        update_cache: true
-        cache_valid_time: 43200
+- name: Update Package Cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 43200
 
-    - name: Create Folder for GPG Keys
-      ansible.builtin.file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: '0755'
+- name: Create Folder for GPG Keys
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
 
-    - name: Add Docker's GPG Key
-      block:
-        - name: Get Docker GPG Key without apt key
-          ansible.builtin.get_url:
-            url: https://download.docker.com/linux/ubuntu/gpg
-            dest: /etc/apt/keyrings/docker.asc
-            mode: '0644'
+- name: Add Docker's GPG Key
+  block:
+    - name: Get Docker GPG Key without apt key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
 
-        - name: Add Docker Repository
-          ansible.builtin.apt_repository:
-            # repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable"
-            repo: "deb [arch={{ arch }} signed-by={{ docker_signed_key}}] {{ docker_ubuntu_repo }} {{ ubuntu_release }} stable"
-            state: present
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        # repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable"
+        repo: "deb [arch={{ arch }} signed-by={{ docker_signed_key }}] {{ docker_ubuntu_repo }} {{ ubuntu_release }} stable"
+        state: present
 
-    - name: Update Package Cache
-      ansible.builtin.apt:
-        update_cache: true
+- name: Update Package Cache
+  ansible.builtin.apt:
+    update_cache: true
 
-    - name: Install Docker Engine
-      ansible.builtin.apt:
-        pkg:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
+- name: Install Docker Engine
+  ansible.builtin.apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
 
-    - name: Add devops user to docker group
-      ansible.builtin.user:
-        name: devops
-        groups: docker
-        append: yes
-            
+- name: Add ansible user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: true
+
 # TODO: if necessary start the docker daemon and enable it to start on boot
 # it looks like when I ran this on Ubuntu 22.04 server it was enabled by default
-
