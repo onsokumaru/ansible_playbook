@@ -5,3 +5,45 @@
 # - .ssh/GitHub
 # - .ssh/GitLab
 # - .ssh/Local
+  # become: true
+
+- name: Create SSH Folders
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/{{ item }}"
+    state: directory
+    mode: '0700'
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+  loop:
+    - .ssh/AWS
+    - .ssh/BitBucket
+    - .ssh/GitHub
+    - .ssh/GitLab
+    - .ssh/Linode
+    - .ssh/Local
+
+- name: Create Other Home Folders
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+  loop:
+    - archive
+    - backup
+    - src
+    - code/ansible
+    - code/bash/projects
+    - code/c/learning
+    - code/c/libs
+    - code/c/projects
+    - code/c/testing
+    - code/docker
+    - code/lxd
+    - code/python3/modules
+    - code/python3/projects
+    - code/ruby/gems
+    - code/ruby/projects
+    - code/rust/crates
+    - code/rust/projects
