@@ -1,2 +1,35 @@
+---
 # runner for all ansible tasks in project
 # TODO: write code to initiate all task from this playbook
+- name: Personal Systems Setup
+  hosts: all
+
+  vars_files:
+    - vars/defaults.yml
+    - vars/dockerconf.yml
+    - vars/rustconf.yml
+
+  tasks:
+    - name: Install Core Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/core.yml
+
+    - name: Install PIP Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/pip.yml
+
+    - name: Install Docker Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/docker.yml
+          
+    - name: Install NVM Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/nvm.yml
+
+    - name: Install Rust Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/rust.yml
+
+    - name: Install Snap Packages
+      ansible.builtin.include_tasks:
+        file: ./tasks/packages/snap.yml
