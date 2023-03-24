@@ -21,7 +21,7 @@
     - name: Install Docker Packages
       ansible.builtin.include_tasks:
         file: ./tasks/packages/docker.yml
-          
+
     - name: Install NVM Packages
       ansible.builtin.include_tasks:
         file: ./tasks/packages/nvm.yml
