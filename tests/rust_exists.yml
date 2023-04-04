@@ -4,13 +4,31 @@
   user: "devops"
   become: true
 
+  # tasks:
+  #   - name: Check for Rust Installation
+  #     ansible.builtin.command: "/usr/bin/which cargo"
+  #     register: rust_exists
+  #     ignore_errors: true
+
+  #   - name: Print results
+  #     ansible.builtin.debug:
+  #       msg: "No Rust install found"
+  #     when: rust_exists is failed
+
   tasks:
     - name: Check for Rust Installation
-      ansible.builtin.command: "/usr/bin/which cargo"
-      register: rust_exists
+      stat:
+        # path: "{{ ansible_user_dir }}/.cargo/env"
+        path: "/home/mike/.cargo/env"
+      register: cargo_env
       ignore_errors: true
 
-    - name: Print results
+    - name: Report Rust is Present
       ansible.builtin.debug:
-        msg: "No Rust install found"
-      when: rust_exists is failed
+        msg: ".cargo/env found"
+      when: cargo_env.stat.exists
+        
+    - name: Report Rust is not Present
+      ansible.builtin.debug:
+        msg: ".cargo/env not found"
+      when: not cargo_env.stat.exists
