@@ -29,6 +29,13 @@
 - name: Install Rust/Cargo
   ansible.builtin.command: '{{ ansible_user_dir }}/sh.rustup.rs -y'
 
+# install seems to work in spite of linting failing
+# last step is to source "$HOME/.cargo/env"
+# TODO: source $HOME/.cargo/env
+
+- name: Source Rust Environment
+  ansible.builtin.shell:
+    cmd: . '{{ ansible_user_dir }}'/.cargo/env
   # when: rust_exists is failed
   # become: true
   # become_user: "{{ ansible_user_id }}"
